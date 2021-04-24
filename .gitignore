@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+android/gradle/wrapper/gradle-6.5-all.zip
 
 # Web related
 lib/generated_plugin_registrant.dart
