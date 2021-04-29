@@ -38,7 +38,6 @@ class AppRouter {
   }
 
   static void logout() {
-    // UserStore.remove();
     if (navKey.currentContext != null) {
       Navigator.pushNamedAndRemoveUntil(
           navKey.currentContext!, Routes.login, (route) => false);
@@ -72,14 +71,14 @@ class Routes {
   }
 }
 
-var loginRouteHandler = Handler(
-    handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) {
-  return Login();
-});
-
 var lauchRouteHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) {
   return Launch();
+});
+
+var loginRouteHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) {
+  return Login();
 });
 
 var homeRouteHandler = Handler(

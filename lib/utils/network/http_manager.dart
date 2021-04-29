@@ -22,8 +22,8 @@ class HttpManager {
         connectTimeout: 60000,
       ),
     );
-    _dio.interceptors.add(DioLogInterceptor());
-    _dio.interceptors.add(ResponseInterceptors());
+    // _dio.interceptors.add(DioLogInterceptor());
+    // _dio.interceptors.add(ResponseInterceptors());
   }
 
   static HttpManager getInstance() {
@@ -47,6 +47,7 @@ class HttpManager {
     Response response;
     try {
       var options = Options(headers: headers);
+      print(parameters);
       response = await _dio.post(api, data: parameters, options: options);
     } on DioError catch (e) {
       return resultError(e);

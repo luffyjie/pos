@@ -1,7 +1,7 @@
 class LoginModel {
   String? token;
-  double? cashWallet;
-  double? loadWallet;
+  num? cashWallet;
+  num? loadWallet;
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];

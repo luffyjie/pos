@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class Core {
+  String? uuid;
   String? appversion;
   int? terminalType;
   String? appName;
@@ -13,8 +16,6 @@ class Core {
   String? latitude;
   String? model;
   String? imei;
-
-  /// 1.wifi 2.line
   int? wifi;
   String? address;
   int? timeZone;
@@ -32,6 +33,9 @@ class Core {
 
   static Future initialize() async {
     var core = Core();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    core.uuid = prefs.getString('deviceId') ?? Uuid().v1();
+    prefs.setString('deviceId', core.uuid ?? '');
     var deviceInfoPlugin = DeviceInfoPlugin();
     var package = await PackageInfo.fromPlatform();
     core.appversion = package.version;

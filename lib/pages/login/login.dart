@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
       UserStore.of(context).updateToken(model.token);
       AppRouter.pushAndReplace(context, Routes.home);
     } else {
-      showErrorBar(context, result.message);
+      showErrorBar(context, result['message']);
     }
   }
 
@@ -89,9 +89,12 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              assetsIcon('login_logo'),
-              fit: BoxFit.contain,
+            Container(
+              width: 64,
+              child: Image.asset(
+                assetsIcon('logo'),
+                fit: BoxFit.contain,
+              ),
             ),
             SizedBox(height: 40),
             Form(

@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserStore extends ChangeNotifier {
   String? token;
-  double? cashWallet;
-  double? loadWallet;
+  num? cashWallet;
+  num? loadWallet;
 
   updateToken(String? token) {
     token = token;
@@ -15,13 +15,13 @@ class UserStore extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateCashWallet(double? cashWallet) {
+  updateCashWallet(num? cashWallet) {
     cashWallet = cashWallet;
     save('cashWallet', cashWallet);
     notifyListeners();
   }
 
-  updateLoadWallet(double? loadWallet) {
+  updateLoadWallet(num? loadWallet) {
     loadWallet = loadWallet;
     save('loadWallet', loadWallet);
     notifyListeners();

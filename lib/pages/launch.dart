@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pos/router/app_router.dart';
+import 'package:pos/store/user_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 
 class Launch extends StatefulWidget {
   @override
@@ -11,23 +12,31 @@ class _LaunchState extends State<Launch> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _verifyToken();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Container(),
+      ),
+    );
   }
 
   void _verifyToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var uuid = prefs.getString('deviceId');
-    if (uuid == null) {
-      uuid = Uuid().v1();
-      prefs.setString('deviceId', uuid);
-    }
-    if (prefs.getString('token') == null) {}
+    var token = prefs.getString('token');
+    UserStore.of(context).updateToken(token);
+    AppRouter.pushAndReplace(context, Routes.login);
+    // if (token != null) {
+    //   AppRouter.pushAndReplace(context, Routes.home);
+    // } else {
+    //   AppRouter.pushAndReplace(context, Routes.login);
+    // }
   }
 }

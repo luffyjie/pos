@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +13,6 @@ import 'themes/theme_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await availableCameras();
   await Core.initialize();
   runApp(MyApp());
   if (Platform.isAndroid) {
@@ -31,7 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _AppState extends State<MyApp> {
-  final router = FluroRouter();
+  final router = FluroRouter.appRouter;
 
   _AppState() {
     Routes.configureRouters(router);
@@ -44,7 +42,7 @@ class _AppState extends State<MyApp> {
       child: OKToast(
         child: MaterialApp(
           navigatorKey: AppRouter.navKey,
-          title: 'Advance POS',
+          title: 'POS',
           debugShowCheckedModeBanner: false,
           theme: themeData,
           initialRoute: Routes.launch,
