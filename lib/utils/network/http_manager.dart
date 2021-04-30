@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pos/utils/network/profile.dart';
 
-import 'http_data_interceptor.dart';
-import 'http_log_interceptor.dart';
-
 class HttpManager {
   late Dio _dio;
 
@@ -22,8 +19,6 @@ class HttpManager {
         connectTimeout: 60000,
       ),
     );
-    // _dio.interceptors.add(DioLogInterceptor());
-    // _dio.interceptors.add(ResponseInterceptors());
   }
 
   static HttpManager getInstance() {
@@ -37,9 +32,6 @@ class HttpManager {
     } on DioError catch (e) {
       return resultError(e);
     }
-    if (response.data is DioError) {
-      return resultError(response.data['code']);
-    }
     return response.data;
   }
 
@@ -47,20 +39,16 @@ class HttpManager {
     Response response;
     try {
       var options = Options(headers: headers);
-      print(parameters);
       response = await _dio.post(api, data: parameters, options: options);
     } on DioError catch (e) {
       return resultError(e);
-    }
-    if (response.data is DioError) {
-      return resultError(response.data['code']);
     }
     return response.data;
   }
 
   Map<String, dynamic> resultError(DioError e) {
-    var code = e.response?.statusCode;
-    var message = e.response?.statusMessage;
+    var code = e.response?.statusCode ?? 500;
+    var message = e.response?.statusMessage ?? ErorMessage.service;
     var headers = e.response?.headers;
     return {
       'code': code,

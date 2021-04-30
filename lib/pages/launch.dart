@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos/router/app_router.dart';
 import 'package:pos/store/user_store.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Launch extends StatefulWidget {
   @override
@@ -29,14 +28,11 @@ class _LaunchState extends State<Launch> {
   }
 
   void _verifyToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    UserStore.of(context).updateToken(token);
-    AppRouter.pushAndReplace(context, Routes.login);
-    // if (token != null) {
-    //   AppRouter.pushAndReplace(context, Routes.home);
-    // } else {
-    //   AppRouter.pushAndReplace(context, Routes.login);
-    // }
+    await UserStore.of(context).loadStore();
+    if (UserStore.of(context).token != null) {
+      AppRouter.pushAndReplace(context, Routes.home);
+    } else {
+      AppRouter.pushAndReplace(context, Routes.login);
+    }
   }
 }

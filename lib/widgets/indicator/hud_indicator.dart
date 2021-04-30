@@ -41,7 +41,7 @@ class _HudIndicatorSate extends State<HudIndicator>
                 maxWidth: 52.5,
                 maxHeight: 52.5,
               ),
-              child: Image.asset(assetsIcon('logo')),
+              child: Image.asset(assetsIcon('loading_circle_logo')),
             ),
           ),
           Positioned(

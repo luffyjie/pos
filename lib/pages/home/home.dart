@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pos/router/app_router.dart';
+import 'package:pos/store/user_store.dart';
 import 'package:pos/utils/utils.dart';
 
 class Home extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomeState extends State<Home> {
           ElevatedButton(
               child: Text('Exit'),
               onPressed: () async {
+                UserStore.remove();
                 AppRouter.exit();
               }),
           ElevatedButton(
@@ -78,13 +80,13 @@ class _HomeState extends State<Home> {
                       padding: EdgeInsets.only(bottom: 10),
                       child: Row(
                         children: [
-                          Image.asset(
-                            assetsIcon('storefront'),
-                            fit: BoxFit.contain,
+                          Icon(
+                            Icons.storefront,
+                            color: colorScheme.onPrimary,
                           ),
                           SizedBox(width: 5),
                           Text(
-                            '001-Maria Lourdes',
+                            '0001-Singapor',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
@@ -93,9 +95,9 @@ class _HomeState extends State<Home> {
                           ),
                           Spacer(),
                           InkWell(
-                            child: Image.asset(
-                              assetsIcon('menu'),
-                              fit: BoxFit.contain,
+                            child: Icon(
+                              Icons.menu,
+                              color: colorScheme.onPrimary,
                             ),
                           ),
                         ],
@@ -118,11 +120,11 @@ class _HomeState extends State<Home> {
                       flex: 1,
                       child: Row(
                         children: [
-                          _card('cashin', 'Cash In', onTap: () {
+                          _card('cashin', 'Cash Money ', onTap: () {
                             AppRouter.push(context, Routes.cashIn);
                           }),
                           SizedBox(width: 5.5),
-                          _card('buyload', 'Buy Load', onTap: () {
+                          _card('buyload', 'Mobile', onTap: () {
                             // AppRouter.push(context, Routes.buyload);
                           }),
                         ],
@@ -133,11 +135,11 @@ class _HomeState extends State<Home> {
                       flex: 1,
                       child: Row(
                         children: [
-                          _card('sendmoney', 'Send Money', onTap: () {
+                          _card('sendmoney', 'Remit', onTap: () {
                             // AppRouter.push(context, Routes.sendMoney);
                           }),
                           SizedBox(width: 5),
-                          _card('paybills', 'Pay Bills'),
+                          _card('paybills', 'Bills'),
                         ],
                       ),
                     ),
@@ -146,9 +148,9 @@ class _HomeState extends State<Home> {
                       flex: 1,
                       child: Row(
                         children: [
-                          _card('cashpickup', 'Cash Pick Up'),
+                          _card('cashpickup', 'Loan'),
                           SizedBox(width: 5.5),
-                          _card('kyc', 'KYC'),
+                          _card('kyc', 'admission'),
                         ],
                       ),
                     ),
@@ -157,11 +159,13 @@ class _HomeState extends State<Home> {
                       flex: 1,
                       child: Row(
                         children: [
-                          _card('epin', 'ePIN   '),
-                          SizedBox(width: 5),
                           _card('transactions', 'Transactions', onTap: () {
                             // AppRouter.push(context, Routes.transactionHistory);
                           }),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Container(),
+                          ),
                         ],
                       ),
                     ),
@@ -184,11 +188,7 @@ class _HomeState extends State<Home> {
         child: InkWell(
           borderRadius: BorderRadius.circular(2.0),
           splashColor: colorScheme.primary.withAlpha(100),
-          onTap: () {
-            if (onTap != null) {
-              onTap();
-            }
-          },
+          onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2.0),
@@ -198,6 +198,7 @@ class _HomeState extends State<Home> {
               children: [
                 Flexible(
                   child: Container(
+                    width: 34,
                     child: Image.asset(
                       assetsIcon(icon),
                       fit: BoxFit.contain,
@@ -237,6 +238,7 @@ class _HomeState extends State<Home> {
             children: [
               Flexible(
                 child: Container(
+                  width: 45,
                   child: Image.asset(
                     assetsIcon('scan'),
                     fit: BoxFit.contain,

@@ -27,6 +27,11 @@ class UserStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  loadStore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+  }
+
   save(String key, dynamic value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (value is String) {

@@ -42,7 +42,7 @@ class _AppState extends State<MyApp> {
       child: OKToast(
         child: MaterialApp(
           navigatorKey: AppRouter.navKey,
-          title: 'POS',
+          title: 'Matrix POS',
           debugShowCheckedModeBanner: false,
           theme: themeData,
           initialRoute: Routes.launch,

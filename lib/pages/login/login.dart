@@ -90,9 +90,9 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 64,
+              width: 185,
               child: Image.asset(
-                assetsIcon('logo'),
+                assetsIcon('login_logo'),
                 fit: BoxFit.contain,
               ),
             ),
@@ -113,6 +113,7 @@ class _LoginState extends State<Login> {
                         filled: false,
                         labelText: "Username",
                         icon: Container(
+                          width: 28,
                           margin: EdgeInsets.only(top: 20),
                           child: Image.asset(
                             assetsIcon('login_account'),
@@ -142,6 +143,7 @@ class _LoginState extends State<Login> {
                         filled: false,
                         labelText: "Password",
                         icon: Container(
+                          width: 28,
                           margin: EdgeInsets.only(top: 20),
                           child: Image.asset(
                             assetsIcon('login_password'),
