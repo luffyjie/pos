@@ -49,3 +49,12 @@ Future<dynamic> queryUserInfo() async {
       await service.post('/api/v1/user/queryUserInfo', parameters, token: true);
   return result;
 }
+
+Future<dynamic> getChannelConfig(int businessType) async {
+  var parameters = await addCommonParams();
+  parameters['businessType'] = businessType;
+  var service = Service();
+  var result = await service.post('/api/v1/channel/channelList', parameters,
+      token: true);
+  return result;
+}
