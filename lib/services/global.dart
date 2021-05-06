@@ -33,28 +33,48 @@ Future<dynamic> login(String userAccount, String password) async {
   var parameters = await addCommonParams();
   parameters['userAccount'] = userAccount;
   parameters['password'] = password;
-  var service = Service();
-  var result = await service.post('/api/v1/user/login', parameters);
+  var result = await Service().post('/api/v1/user/login', parameters);
   return result;
 }
 
 /// User information API, [Future<dynamic>].
-/// This API requires [token].
 /// When we needs user's currently wallet ammount
 ///
 Future<dynamic> queryUserInfo() async {
   var parameters = await addCommonParams();
-  var service = Service();
-  var result =
-      await service.post('/api/v1/user/queryUserInfo', parameters, token: true);
+  var result = await Service().post('/api/v1/user/queryUserInfo', parameters);
+  return result;
+}
+
+/// Payment confirm, [Future<Result>].
+/// This API requires [Map<String, dynamic>data].
+/// parameter cotains [businessType] [goodId] [goodAmount] [goodsName] [orderTmpId]
+///
+Future<dynamic> payment(Map<String, dynamic> data) async {
+  var parameters = await addCommonParams(data: data);
+  var result = await Service().post('/api/v1/payment/panel', parameters);
+  return result;
+}
+
+/// Order submit, [Future<Result>].
+/// This API requires [Map<String, dynamic>data].
+/// parameter cotains [tmpId] [methodId] [payPassword]
+///
+Future<dynamic> orderPay(Map<String, dynamic> data) async {
+  var parameters = await addCommonParams(data: data);
+  var result = await Service().post('/api/v1/payment/orderPay', parameters);
   return result;
 }
 
 Future<dynamic> getChannelConfig(int businessType) async {
   var parameters = await addCommonParams();
   parameters['businessType'] = businessType;
-  var service = Service();
-  var result = await service.post('/api/v1/channel/channelList', parameters,
-      token: true);
+  var result = await Service().post('/api/v1/channel/channelList', parameters);
+  return result;
+}
+
+Future<dynamic> getInitConfig() async {
+  var parameters = await addCommonParams();
+  var result = await Service().post('/api/v1/init/initConfig', parameters);
   return result;
 }

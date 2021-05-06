@@ -8,6 +8,7 @@ import 'package:pos/pages/cash_in/cash_inf_form.dart';
 import 'package:pos/pages/home/home.dart';
 import 'package:pos/pages/launch.dart';
 import 'package:pos/pages/login/login.dart';
+import 'package:pos/pages/payment/paymentResult.dart';
 
 class AppRouter {
   static final navKey = new GlobalKey<NavigatorState>();
@@ -63,6 +64,8 @@ class Routes {
   static String scanQR = '/sendQR';
   static String scanVerify = '/scanVerify';
 
+  static String paymentResult = '/paymentResult';
+
   static void configureRouters(FluroRouter router) {
     router.notFoundHandler = Handler(handlerFunc:
         (BuildContext? context, Map<String, List<String>> parameters) {
@@ -74,6 +77,7 @@ class Routes {
     router.define(home, handler: homeRouteHandler);
     router.define(cashIn, handler: cashInRouteHandler);
     router.define(cashInForm, handler: cashInFormRouteHandler);
+    router.define(paymentResult, handler: paymentResultRouteHandler);
   }
 }
 
@@ -105,4 +109,14 @@ var cashInFormRouteHandler = Handler(
     map = jsonDecode(data);
   }
   return CashInForm(data: map);
+});
+
+var paymentResultRouteHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) {
+  var data = parameters['data']?.first;
+  var map = Map<String, dynamic>();
+  if (data is String) {
+    map = jsonDecode(data);
+  }
+  return PaymentResult(data: map);
 });

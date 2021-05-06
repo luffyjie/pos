@@ -11,13 +11,10 @@ class Service {
 
   Service._internal();
 
-  Future<dynamic> post(String path, Map<String, dynamic> parameters,
-      {bool token = false}) async {
-    var header = {'kkk': 'cccc'};
-    if (token) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      header['token'] = prefs.getString('token') ?? '';
-    }
+  Future<dynamic> post(String path, Map<String, dynamic> parameters) async {
+    var header = {'pos': 'app'};
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    header['token'] = prefs.getString('token') ?? '';
     dynamic result = await HttpManager.getInstance()
         .post(path, parameters: parameters, headers: header);
     return result;
