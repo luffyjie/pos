@@ -66,6 +66,8 @@ class Routes {
 
   static String paymentResult = '/paymentResult';
 
+  static String transDetail = '/transactionHistory/detail';
+
   static void configureRouters(FluroRouter router) {
     router.notFoundHandler = Handler(handlerFunc:
         (BuildContext? context, Map<String, List<String>> parameters) {

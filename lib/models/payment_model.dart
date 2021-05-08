@@ -1,6 +1,6 @@
 class PaymentModel {
-  String? tmpId;
-  String? methodId;
+  int? tmpId;
+  int? methodId;
   List<PaymentListModel>? paymentList;
 
   PaymentModel.fromJson(Map<String, dynamic> json) {
@@ -16,7 +16,7 @@ class PaymentModel {
 }
 
 class PaymentListModel {
-  String? methodId;
+  int? methodId;
   String? methodName;
   String? methodLogo;
   double? serviceFee;

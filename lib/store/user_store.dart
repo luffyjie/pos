@@ -10,26 +10,26 @@ class UserStore extends ChangeNotifier {
   double? loadWallet;
 
   updateToken(String? token) {
-    token = token;
+    this.token = token;
     save('token', token);
     notifyListeners();
   }
 
   updateCashWallet(double? cashWallet) {
-    cashWallet = cashWallet;
+    this.cashWallet = cashWallet;
     save('cashWallet', cashWallet);
     notifyListeners();
   }
 
   updateLoadWallet(double? loadWallet) {
-    loadWallet = loadWallet;
+    this.loadWallet = loadWallet;
     save('loadWallet', loadWallet);
     notifyListeners();
   }
 
   loadStore() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token');
+    this.token = prefs.getString('token');
   }
 
   save(String key, dynamic value) async {
@@ -44,8 +44,8 @@ class UserStore extends ChangeNotifier {
 
   queryWallet() async {
     var result = await queryUserInfo();
-    if (result.data != null) {
-      var model = UserInfoModel.fromJson(result.data);
+    if (result['data'] != null) {
+      var model = UserInfoModel.fromJson(result['data']);
       updateCashWallet(model.cashWallet);
       updateLoadWallet(model.loadWallet);
     }

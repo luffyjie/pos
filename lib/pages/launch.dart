@@ -30,6 +30,7 @@ class _LaunchState extends State<Launch> {
   void _verifyToken() async {
     await UserStore.of(context).loadStore();
     if (UserStore.of(context).token != null) {
+      UserStore.of(context).queryWallet();
       AppRouter.pushAndReplace(context, Routes.home);
     } else {
       AppRouter.pushAndReplace(context, Routes.login);

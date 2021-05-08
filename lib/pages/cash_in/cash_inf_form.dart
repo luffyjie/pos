@@ -75,9 +75,9 @@ class _CashInFormState extends State<CashInForm> {
 
   void getConfig() async {
     var result = await getInitConfig();
-
-    if (result.data != null) {
-      List<dynamic> feeConfigList = result.data['feeList'];
+    if (result['data'] != null) {
+      var data = result['data'];
+      List<dynamic> feeConfigList = data['feeList'];
       List<FeeConfigModel> list = feeConfigList
           .map<FeeConfigModel>((item) => FeeConfigModel.fromJson(item))
           .toList();
@@ -161,8 +161,8 @@ class _CashInFormState extends State<CashInForm> {
     showLoadingDialog(context);
     var result = await payment(data);
     dismissLoadingDialog(context);
-    if (result.data != null) {
-      var model = PaymentModel.fromJson(result.data);
+    if (result['data'] != null) {
+      var model = PaymentModel.fromJson(result['data']);
       var currency = model.paymentList?.first.currency ?? '₱';
       var methodId = model.paymentList?.first.methodId;
       var tmpId = model.tmpId;

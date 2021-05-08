@@ -78,3 +78,18 @@ Future<dynamic> getInitConfig() async {
   var result = await Service().post('/api/v1/init/initConfig', parameters);
   return result;
 }
+
+Future<dynamic> queryOrderStatus(String orderId) async {
+  var parameters = await addCommonParams();
+  parameters['orderId'] = orderId;
+  var result =
+      await Service().post('/api/v1/order/queryOrderStatus', parameters);
+  return result;
+}
+
+Future<dynamic> orderDetail(String orderId) async {
+  var parameters = await addCommonParams();
+  parameters['orderId'] = orderId;
+  var result = await Service().post('/api/v1/order/orderDetails', parameters);
+  return result;
+}

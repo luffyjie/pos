@@ -12,8 +12,8 @@ import 'password.dart';
 
 showPay(
   BuildContext context,
-  String? methodId,
-  String? tmpId,
+  int? methodId,
+  int? tmpId,
   String? currency,
   double? realAmount,
   double? serviceFee,
@@ -33,8 +33,8 @@ showPay(
 }
 
 class Payment extends StatefulWidget {
-  final String? methodId;
-  final String? tmpId;
+  final int? methodId;
+  final int? tmpId;
   final String? currency;
   final double? realAmount;
   final double? serviceFee;
@@ -74,9 +74,9 @@ class _PaymentState extends State<Payment> {
     };
     var result = await orderPay(data);
     dismissLoadingDialog(context);
-    if (result.data != null) {
-      if (result.data is Map<String, dynamic>) {
-        var json = jsonEncode(result.data);
+    if (result['data'] != null) {
+      if (result['data'] is Map<String, dynamic>) {
+        var json = jsonEncode(result['data']);
         var query = Uri.encodeComponent(json);
         AppRouter.pushAndReplace(
             context, '${Routes.paymentResult}?data=$query');
